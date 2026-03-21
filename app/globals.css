@@ -126,10 +126,6 @@
   h3 {
     @apply font-schibsted-grotesk text-2xl font-bold;
   }
-
-  ul {
-    @apply list-disc list-inside;
-  }
 }
 
 @layer components {
@@ -163,12 +159,12 @@
     }
 
     ul {
-      @apply flex flex-row items-center gap-6;
+      @apply flex flex-row items-center gap-6 list-none;
     }
   }
 
   .events {
-    @apply grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1;
+    @apply grid md:grid-cols-3 gap-10 sm:grid-cols-2 grid-cols-1 list-none;
   }
 
   #event-card {
@@ -214,6 +210,8 @@
           @apply flex flex-col gap-2;
 
           ul {
+            @apply list-disc list-inside;
+
             li {
               @apply text-light-100 text-lg max-sm:text-sm;
             }
