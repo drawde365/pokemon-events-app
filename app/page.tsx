@@ -1,8 +1,17 @@
 import ExploreBtn from "@/components/ExploreBtn";
 import EventCard from "@/components/EventCard";
-import { events } from "@/lib/Constants";
+import { IEvent } from "@/database/event.model";
+// import { events } from "@/lib/Constants";
 
-export default function HomePage() {
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+
+export default async function HomePage() {
+  const response = await fetch(`${BASE_URL}/api/events`);
+  const { events }: { events: IEvent[] } = await response.json();
+  // console.log(events);
+  if (events) {
+    console.log(events);
+  } else console.log("Nada");
   return (
     <section>
       <h1 className={"text-center"}>
@@ -15,12 +24,14 @@ export default function HomePage() {
       <div className={"mt-20 space-y-7"}>
         <h3>Featured Events</h3>
         <ul className={"events"}>
-          {events.map((event) => (
-            <li key={event.title}>
-              <EventCard {...event} />
-              {/*<EventCard title={event.title} image={event.image} />*/}
-            </li>
-          ))}
+          {events &&
+            events.length > 0 &&
+            events.map((event) => (
+              <li key={event.title}>
+                <EventCard {...event} />
+                {/*<EventCard title={event.title} image={event.image} />*/}
+              </li>
+            ))}
         </ul>
       </div>
     </section>

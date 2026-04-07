@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { JSX } from "react";
 import { slice } from "eslint-config-next";
+import posthog from "posthog-js";
 
 interface Props {
   slug: string;
@@ -21,7 +23,13 @@ export default function EventCard({
   time,
 }: Props) {
   return (
-    <Link href={`/events/${slug}`} id={"event-card"}>
+    <Link
+      href={`/events/${slug}`}
+      id={"event-card"}
+      // onClick={() =>
+      //   posthog.capture("event_card_clicked", { title, location, date, slug })
+      // }
+    >
       <Image
         src={image}
         alt={"Event's Image"}
